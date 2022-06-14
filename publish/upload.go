@@ -106,17 +106,17 @@ func (ul UploadList) upload(conn *ftp.ServerConn, wg *sync.WaitGroup) {
             log.Fatalln(err)
         }
         if err = conn.Stor(file, f); err != nil {
-            f.Close()
+            utils.Close(f)
             log.Fatalln(err)
         }
-        f.Close()
+        utils.Close(f)
         log.Printf("[ACT] upload [MSG] Completed: %s\n", file)
     }
     log.Printf("[ACT] upload [MSG] Conn(%s) done\n", ul.Size)
 }
 
 // RunPublish uploads some files(jpg/zip) to the target FTP server.
-// As of 22.06.11, FTPS conn is not available due to problems with "jlaffaye/ftp".
+// 22.06.11, FTPS conn is not available due to problems with "jlaffaye/ftp".
 // Maybe issue#253
 // https://github.com/jlaffaye/ftp/issues/253
 func RunPublish(matNo *string, remotePathNo *int) {

@@ -1,6 +1,7 @@
 package utils
 
 import (
+    "io"
     "io/fs"
     "log"
     "path/filepath"
@@ -48,4 +49,10 @@ func FindFiles(root string, all bool) (sizeL []string, sizeM []string, sizeS []s
     }
 
     return l, m, s
+}
+
+func Close(c io.Closer) {
+    if err := c.Close(); err != nil {
+        log.Fatalln(err)
+    }
 }

@@ -26,7 +26,7 @@ func (uc urlTextConfig) writeUrlText(matNo *string, pathNo *int, uls []UploadLis
     if err != nil {
         log.Fatalln(err)
     }
-    defer f.Close()
+    defer utils.Close(f)
 
     // Set url text
     // e.g. https://nnamm.com/ + path/to/upload-dir/ + no + 000 + /
