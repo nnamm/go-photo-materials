@@ -34,14 +34,14 @@ func LoadFtpConfig(path string) FtpConfig {
 }
 
 type UrlTextConfig struct {
-    Home       string
+    RemoteHome string
     RemotePath []string
 }
 
 func LoadPathConfig(path string) UrlTextConfig {
     cfg := load(path)
     return UrlTextConfig{
-        Home: cfg.Section("path").Key("remoteHome").String(),
+        RemoteHome: cfg.Section("path").Key("remote_home").String(),
         RemotePath: []string{
             cfg.Section("path").Key("test_path").String(),
             cfg.Section("path").Key("product_path1").String(),

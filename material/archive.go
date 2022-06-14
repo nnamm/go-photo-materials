@@ -69,7 +69,7 @@ func CreateZipFiles(matNo *string) {
 
     // Create archive files
     for _, al := range als {
-        log.Printf("[ACT] CreateZipFiles [MSG] Archive List(%s): %s\n", al.size, al.files)
+        log.Printf("[ACT] CreateZipFiles [MSG] Archive list(%s): %s\n", al.size, al.files)
         al.newZipFile(*matNo)
         log.Printf("[ACT] CreateZipFiles [MSG] Archive completed(%s)\n", al.size)
     }

@@ -7,14 +7,14 @@ import (
 )
 
 type urlTextConfig struct {
-    home       string
+    remoteHome string
     remotePath []string
 }
 
 func loadUrlTextConfig() urlTextConfig {
     c := utils.LoadPathConfig("../config.ini")
     return urlTextConfig{
-        c.Home,
+        c.RemoteHome,
         c.RemotePath,
     }
 }
@@ -28,7 +28,7 @@ func (uc urlTextConfig) writeUrlText(matNo *string, pathNo *int, uls []UploadLis
 
     // Set url text
     // e.g. https://nnamm.com/ + path/to/upload-dir/ + no + 000 + /
-    urlBase := uc.home + uc.remotePath[*pathNo] + "no" + *matNo + "/"
+    urlBase := uc.remoteHome + uc.remotePath[*pathNo] + "no" + *matNo + "/"
 
     // Repeat for the num of elements in the list
     for i := 0; i < len(uls[0].Files); i++ {
