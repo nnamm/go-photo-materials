@@ -69,7 +69,7 @@ func (fc ftpConfig) connectUploadDir(matNo *string, pathNo *int) (conn *ftp.Serv
             log.Println(err)
             return nil, err
         }
-        log.Printf("[ACT] connectUploadDir [MSG] MakeDir: %s\n", uploadDir)
+        log.Printf("[ACT] connectUploadDir [MSG] MakeDir: %s in remote\n", uploadDir)
     }
 
     if err = conn.ChangeDir(uploadDir); err != nil {
@@ -99,6 +99,7 @@ type UploadList struct {
 }
 
 func (ul UploadList) upload(conn *ftp.ServerConn, wg *sync.WaitGroup) {
+    log.Printf("[ACT] upload [MSG] Upload list(%s): %s\n", ul.Size, ul.Files)
     defer wg.Done()
     for _, file := range ul.Files {
         f, err := os.Open(file)
