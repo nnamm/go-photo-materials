@@ -18,14 +18,10 @@ func (al archiveList) newZipFile(matNo string) {
     if err != nil {
         log.Fatalln(err)
     }
-    defer f.Close()
+    defer utils.Close(f)
 
     zipWriter := zip.NewWriter(f)
-    defer func(zipWriter *zip.Writer) {
-        if err = zipWriter.Close(); err != nil {
-            log.Fatalln(err)
-        }
-    }(zipWriter)
+    defer utils.Close(zipWriter)
 
     for _, file := range al.files {
         addFileToZip(zipWriter, file)
@@ -37,7 +33,7 @@ func addFileToZip(zipWriter *zip.Writer, file string) {
     if err != nil {
         log.Fatalln(err)
     }
-    defer fileToZip.Close()
+    defer utils.Close(fileToZip)
 
     info, err := fileToZip.Stat()
     if err != nil {

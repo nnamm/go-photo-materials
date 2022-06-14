@@ -9,7 +9,6 @@ import (
 type urlTextConfig struct {
     home       string
     remotePath []string
-    textPath   string
 }
 
 func loadUrlTextConfig() urlTextConfig {
@@ -17,7 +16,6 @@ func loadUrlTextConfig() urlTextConfig {
     return urlTextConfig{
         c.Home,
         c.RemotePath,
-        c.TextPath,
     }
 }
 
@@ -26,7 +24,7 @@ func (uc urlTextConfig) writeUrlText(matNo *string, pathNo *int, uls []UploadLis
     if err != nil {
         log.Fatalln(err)
     }
-    defer f.Close()
+    defer utils.Close(f)
 
     // Set url text
     // e.g. https://nnamm.com/ + path/to/upload-dir/ + no + 000 + /
@@ -47,7 +45,7 @@ func (uc urlTextConfig) writeUrlText(matNo *string, pathNo *int, uls []UploadLis
     log.Println("[ACT] writeUrlText [MSG] url.txt done")
 }
 
-// RunUrlText is creates a text file with lists of URLs for note publication work
+// RunUrlText creates a text file with lists of URLs for note publication work
 func RunUrlText(matNo *string, pathNo *int, uls []UploadList) {
     uc := loadUrlTextConfig()
     uc.writeUrlText(matNo, pathNo, uls)
