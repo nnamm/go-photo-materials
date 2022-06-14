@@ -36,7 +36,6 @@ func LoadFtpConfig(path string) FtpConfig {
 type UrlTextConfig struct {
     Home       string
     RemotePath []string
-    TextPath   string
 }
 
 func LoadPathConfig(path string) UrlTextConfig {
